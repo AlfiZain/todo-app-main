@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+  --color-Blue-500: hsl(220, 98%, 61%);
+
+  --color-Gray-50: hsl(0, 0%, 98%);
+  --color-Purple-300: hsl(234, 39%, 85%);
+  --color-Gray-300: hsl(233, 11%, 84%);
+  --color-Gray-600: hsl(236, 9%, 61%);
+  --color-Navy-850: hsl(235, 19%, 35%);
+
+  --color-Navy-950: hsl(235, 21%, 11%);
+  --color-Navy-900: hsl(235, 24%, 19%);
+  --color-Purple-300: hsl(234, 39%, 85%);
+  --color-Purple-100: hsl(236, 33%, 92%);
+  --color-Purple-600: hsl(235, 16%, 43%);
+  --color-Purple-700: hsl(233, 14%, 35%);
+  --color-Purple-800: hsl(237, 14%, 26%);
+  --color-Gray-600: hsl(236, 9%, 61%);
+}
