@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "dnd-multi-backend": "^9.0.0",
     "next": "16.0.7",
+    "rdndmb-html5-to-touch": "^9.0.0",
     "react": "19.2.0",
+    "react-dnd": "^16.0.1",
     "react-dom": "19.2.0"
   },
   "devDependencies": {

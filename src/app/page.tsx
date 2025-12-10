@@ -9,6 +9,7 @@ export type Todo = {
   id: number;
   title: string;
   isCompleted: boolean;
+  position: number;
 };
 
 const dummyTodos: Todo[] = [
@@ -16,31 +17,37 @@ const dummyTodos: Todo[] = [
     id: 1,
     title: 'Complete online JavaScript course',
     isCompleted: true,
+    position: 1,
   },
   {
     id: 2,
     title: 'Jog around the park 3x',
     isCompleted: false,
+    position: 2,
   },
   {
     id: 3,
     title: '10 minutes meditation',
     isCompleted: false,
+    position: 3,
   },
   {
     id: 4,
     title: 'Read for 1 hour',
     isCompleted: false,
+    position: 4,
   },
   {
     id: 5,
     title: 'Pick up groceries',
     isCompleted: false,
+    position: 5,
   },
   {
     id: 6,
     title: 'Complete Todo App on Frontend Mentor',
     isCompleted: false,
+    position: 6,
   },
 ];
 
@@ -48,11 +55,7 @@ export default function Home() {
   const todoOptions = ['All', 'Active', 'Completed'];
   const [filter, setFilter] = useState(todoOptions[0]);
 
-  const filteredTodos = dummyTodos.filter((todo) => {
-    if (filter === 'Active') return !todo.isCompleted;
-    if (filter === 'Completed') return todo.isCompleted;
-    return todo;
-  });
+  const sortedTodos = dummyTodos.sort((a, b) => a.position - b.position);
 
   const activeTodo = dummyTodos.filter((todo) => !todo.isCompleted).length;
 
@@ -63,7 +66,7 @@ export default function Home() {
   return (
     <main className="flex flex-col space-y-4 text-sm text-Navy-900 sm:text-base md:space-y-6 lg:text-lg dark:text-Purple-100">
       <CreateTodo />
-      <TodoList todos={filteredTodos}>
+      <TodoList initialTodos={sortedTodos} filter={filter}>
         <div className="flex items-center justify-between gap-x-4 bg-Gray-50 p-4 text-Gray-600 dark:bg-Navy-900">
           <p>{activeTodo} items left</p>
           <TodoMenu
