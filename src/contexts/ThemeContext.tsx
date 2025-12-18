@@ -16,9 +16,12 @@ export default function ThemeProvider({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem('theme') as Theme) || 'light',
-  );
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return 'light';
+
+    const storedTheme = localStorage.getItem('theme') as Theme;
+    return storedTheme ?? 'light';
+  });
 
   const toggleTheme = () => {
     setTheme((prev) => {
