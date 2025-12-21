@@ -1,11 +1,12 @@
 'use client';
 
 import clsx from 'clsx';
+import { TodoFilter } from '../types/filter';
 
 interface TodoMenuProps {
   options: string[];
   filter: string;
-  onOptionClick: (option: string) => void;
+  onOptionClick: (option: TodoFilter) => void;
   className?: string;
 }
 
@@ -21,7 +22,7 @@ export default function TodoMenu({
         {options.map((option, index) => (
           <button
             key={index}
-            onClick={() => onOptionClick(option)}
+            onClick={() => onOptionClick(option as TodoFilter)}
             className={clsx(
               'cursor-pointer font-bold',
               filter === option
