@@ -59,7 +59,7 @@ export default function TodoListWrapper({
   };
 
   const autosave = (updatedTodos: Todo[]) => {
-    if (saveTimeout.current) clearInterval(saveTimeout.current);
+    if (saveTimeout.current) clearTimeout(saveTimeout.current);
 
     saveTimeout.current = setTimeout(async () => {
       const todosId = updatedTodos.map((todo) => todo.id);

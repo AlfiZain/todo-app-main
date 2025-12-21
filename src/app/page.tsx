@@ -2,6 +2,8 @@ import { getTodos } from '@/features/todo/actions/todoActions';
 import CreateTodo from '@/features/todo/components/CreateTodo';
 import TodoListWrapper from '@/features/todo/components/TodoListWrapper';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const todos = await getTodos();
 
