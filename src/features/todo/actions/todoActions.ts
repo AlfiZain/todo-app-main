@@ -110,3 +110,23 @@ export async function deleteCompletedTodos() {
 
   revalidatePath('/');
 }
+
+export async function reorderTodo(todosId: number[]) {
+  if (!todosId.length) return;
+
+  try {
+    await sql`
+      UPDATE todos
+      SET position = ordered.position
+      FROM (
+        SELECT
+          unnest(${sql.array(todosId)}::bigint[]) AS id,
+          generate_series(1, ${todosId.length}) AS position
+      ) AS ordered
+      WHERE todos.id = ordered.id
+    `;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to Reorder Todos');
+  }
+}

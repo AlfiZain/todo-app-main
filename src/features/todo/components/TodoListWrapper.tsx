@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import TodoList from './TodoList';
 import TodoMenu from './TodoMenu';
 import { Todo } from '../types/todo';
 import { TodoFilter } from '../types/filter';
 import ClearTodoButton from './ClearTodoButton';
+import { reorderTodo } from '../actions/todoActions';
 
 type TodoListWrapperProps = {
   initialTodos: Todo[];
@@ -18,6 +19,7 @@ export default function TodoListWrapper({
     [...initialTodos].sort((a, b) => a.position - b.position),
   );
   const [filter, setFilter] = useState<TodoFilter>('All');
+  const saveTimeout = useRef<NodeJS.Timeout | null>(null);
   const todoOptions: TodoFilter[] = ['All', 'Active', 'Completed'];
 
   const filteredTodos = todos.filter((todo) => {
@@ -37,22 +39,33 @@ export default function TodoListWrapper({
   };
 
   const moveItem = (from: number, to: number) => {
-    setTodos((prev) => {
-      const items = [...prev].sort((a, b) => a.position - b.position);
+    const items = [...todos].sort((a, b) => a.position - b.position);
 
-      const fromIndex = items.findIndex((item) => item.position === from);
-      const toIndex = items.findIndex((item) => item.position === to);
+    const fromIndex = items.findIndex((item) => item.position === from);
+    const toIndex = items.findIndex((item) => item.position === to);
 
-      if (fromIndex === -1 || toIndex === -1) return prev;
+    if (fromIndex === -1 || toIndex === -1) return;
 
-      const [moved] = items.splice(fromIndex, 1);
-      items.splice(toIndex, 0, moved);
+    const [moved] = items.splice(fromIndex, 1);
+    items.splice(toIndex, 0, moved);
 
-      return items.map((item, index) => ({
-        ...item,
-        position: index + 1,
-      }));
-    });
+    const updatedTodos = items.map((item, index) => ({
+      ...item,
+      position: index + 1,
+    }));
+
+    setTodos(updatedTodos);
+    autosave(updatedTodos);
+  };
+
+  const autosave = (updatedTodos: Todo[]) => {
+    if (saveTimeout.current) clearInterval(saveTimeout.current);
+
+    saveTimeout.current = setTimeout(async () => {
+      const todosId = updatedTodos.map((todo) => todo.id);
+
+      await reorderTodo(todosId);
+    }, 500);
   };
 
   return (
