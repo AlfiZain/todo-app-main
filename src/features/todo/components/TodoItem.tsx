@@ -40,20 +40,20 @@ export default function TodoItem({
 
   return (
     <div
-      ref={(node) => {
-        dragRef(node);
-        dropRef(node);
-      }}
       className={clsx(
-        'flex cursor-pointer gap-x-4 border-b border-b-Gray-300 bg-Gray-50 p-4 dark:border-b-Gray-600 dark:bg-Navy-900',
-        isDragging ? 'opacity-50' : 'opacity-100',
+        'flex items-center gap-x-4 border-b border-b-Gray-300 bg-Gray-50 p-4 dark:border-b-Gray-600 dark:bg-Navy-900',
       )}
     >
       <CheckButton id={id} isCompleted={isCompleted} />
       <p
+        ref={(node) => {
+          dragRef(node);
+          dropRef(node);
+        }}
         className={clsx(
-          'grow',
+          'grow cursor-pointer',
           isCompleted ? 'text-Gray-600 line-through' : '',
+          isDragging ? 'opacity-50' : 'opacity-100',
         )}
       >
         {title}

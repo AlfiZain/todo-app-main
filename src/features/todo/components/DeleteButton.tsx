@@ -7,10 +7,10 @@ export default function DeleteButton({ id }: { id: number }) {
   const deleteTodoAction = deleteTodoById.bind(null, id);
 
   return (
-    <form action={deleteTodoAction}>
+    <form action={deleteTodoAction} className="shrink-0">
       <button
         type="submit"
-        className="shrink-0 cursor-pointer p-1 outline-none hover:scale-115 focus-visible:ring-2 focus-visible:ring-Blue-500"
+        className="cursor-pointer p-1 outline-none hover:scale-115 focus-visible:ring-2 focus-visible:ring-Blue-500"
       >
         <Image
           src={'/icon-cross.svg'}
