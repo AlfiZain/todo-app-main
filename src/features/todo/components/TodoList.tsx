@@ -48,7 +48,7 @@ export default function TodoList({ todos, onMove, children }: TodoListProps) {
           containerRef.current = node;
           dropRef(containerRef);
         }}
-        className="flex h-[340px] flex-col overflow-x-hidden overflow-y-auto"
+        className="flex h-[375px] flex-col overflow-x-hidden overflow-y-auto"
       >
         {todos.length === 0 ? (
           <div className="flex h-full items-center justify-center text-base lg:text-lg">
