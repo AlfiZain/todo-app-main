@@ -32,8 +32,8 @@ export default function TodoList({ todos, onMove, children }: TodoListProps) {
       // Scroll to top
       if (pointerY < rect.top + SCROLL_THRESHOLD) {
         container.scrollTop -= SCROLL_SPEED;
-      } 
-      
+      }
+
       // Scroll to bottom
       if (pointerY > rect.bottom - SCROLL_THRESHOLD) {
         container.scrollTop += SCROLL_SPEED;
@@ -50,9 +50,15 @@ export default function TodoList({ todos, onMove, children }: TodoListProps) {
         }}
         className="flex h-[340px] flex-col overflow-x-hidden overflow-y-auto"
       >
-        {todos.map((todo) => (
-          <TodoItem key={todo.id} {...todo} moveItem={onMove} />
-        ))}
+        {todos.length === 0 ? (
+          <div className="flex h-full items-center justify-center text-base lg:text-lg">
+            There are no todos to display.
+          </div>
+        ) : (
+          todos.map((todo) => (
+            <TodoItem key={todo.id} {...todo} moveItem={onMove} />
+          ))
+        )}
       </div>
       {children}
     </section>

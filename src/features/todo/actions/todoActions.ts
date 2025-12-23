@@ -18,7 +18,7 @@ export async function getTodos(): Promise<Todo[]> {
     return result;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to Fetch Todos Data');
+    throw new Error('Unable to load the todo list. Please try again later.');
   }
 }
 
@@ -34,7 +34,7 @@ export async function createTodo(
   if (!result.success) {
     const { fieldErrors } = z.flattenError(result.error);
     return {
-      message: 'Failed to Create Todo',
+      message: 'Invalid input. Please check the form fields and try again.',
       errors: fieldErrors,
     };
   }
@@ -49,7 +49,8 @@ export async function createTodo(
   } catch (error) {
     console.error('Database Error:', error);
     return {
-      message: 'Database Error: Failed to Create Todo.',
+      message:
+        'Failed to create a new todo due to a server error. Please try again later.',
       errors: {},
     };
   }
@@ -77,7 +78,9 @@ export async function toggleTodoStatus({
     `;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error(`Failed to Toggle Todo ${id}`);
+    throw new Error(
+      `Failed to update the completion status of the selected todo item. Please try again later.`,
+    );
   }
 
   revalidatePath('/');
@@ -91,7 +94,9 @@ export async function deleteTodoById(id: number) {
     `;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error(`Failed to Delete Todo ${id}`);
+    throw new Error(
+      `Failed to delete the selected todo item. Please try again later.`,
+    );
   }
 
   revalidatePath('/');
@@ -105,7 +110,9 @@ export async function deleteCompletedTodos() {
     `;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to Delete Completed Todos');
+    throw new Error(
+      'Failed to remove completed todos. Please try again later.',
+    );
   }
 
   revalidatePath('/');
@@ -127,6 +134,6 @@ export async function reorderTodo(todosId: number[]) {
     `;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to Reorder Todos');
+    throw new Error('Failed to reorder todo items. Please try again later.');
   }
 }
