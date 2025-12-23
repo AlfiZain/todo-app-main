@@ -13,6 +13,7 @@ export default function Error({
         {error.message}
       </h2>
       <button
+        type="button"
         className="cursor-pointer rounded-md bg-blue-500 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-400"
         onClick={() => reset()}
       >

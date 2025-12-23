@@ -19,6 +19,7 @@ export default function CheckButton({ id, isCompleted }: CheckButtonProps) {
     <form action={toggleTodoStatusAction} className="shrink-0">
       <button
         type="submit"
+        aria-label="toggle todo status"
         className={clsx(
           'h-5 w-5 cursor-pointer rounded-full border border-Gray-600 outline-none hover:border-Blue-500 focus-visible:ring-2 focus-visible:ring-Blue-500',
           isCompleted ? 'bg-Blue-500' : 'bg-transparent',
@@ -27,7 +28,7 @@ export default function CheckButton({ id, isCompleted }: CheckButtonProps) {
         {isCompleted && (
           <Image
             src={'/icon-check.svg'}
-            alt="mark todo as completed"
+            alt=""
             width={10}
             height={10}
             className="mx-auto"

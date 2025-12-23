@@ -36,7 +36,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [https://www.frontendmentor.io/solutions/todo-app-with-nextjs-react-dnd-and-postgresjs-r8nKydrOMb](https://www.frontendmentor.io/solutions/todo-app-with-nextjs-react-dnd-and-postgresjs-r8nKydrOMb)
 - Live Site URL: [https://todo-app-main-alfi.vercel.app/](https://todo-app-main-alfi.vercel.app)
 
 ## My process

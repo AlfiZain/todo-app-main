@@ -10,14 +10,10 @@ export default function DeleteButton({ id }: { id: number }) {
     <form action={deleteTodoAction} className="shrink-0">
       <button
         type="submit"
+        aria-label="delete todo"
         className="cursor-pointer p-1 outline-none hover:scale-115 focus-visible:ring-2 focus-visible:ring-Blue-500"
       >
-        <Image
-          src={'/icon-cross.svg'}
-          alt="delete todo"
-          width={12}
-          height={12}
-        />
+        <Image src={'/icon-cross.svg'} alt="" width={12} height={12} />
       </button>
     </form>
   );

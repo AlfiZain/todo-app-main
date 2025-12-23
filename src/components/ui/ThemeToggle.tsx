@@ -22,12 +22,17 @@ export default function ThemeToggle() {
   };
 
   return (
-    <button className="cursor-pointer" onClick={toggleTheme}>
+    <button
+      className="cursor-pointer"
+      onClick={toggleTheme}
+      type="button"
+      aria-label="toggle theme"
+    >
       <Image
         src={theme === 'light' ? '/icon-moon.svg' : '/icon-sun.svg'}
         width={24}
         height={24}
-        alt="toggle theme"
+        alt=""
         className="h-5 w-5 md:h-6 md:w-6 lg:h-8 lg:w-8 xl:h-10 xl:w-10"
       />
     </button>
