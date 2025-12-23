@@ -1,10 +1,25 @@
 'use client';
 
+import { useTheme } from 'next-themes';
 import Image from 'next/image';
-import { useThemeContext } from '@/contexts/ThemeContext';
+import { useEffect, useState } from 'react';
 
 export default function ThemeToggle() {
-  const { theme, toggleTheme } = useThemeContext();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  const toggleTheme = () => {
+    setTheme((prev) => {
+      return prev === 'light' ? 'dark' : 'light';
+    });
+  };
 
   return (
     <button className="cursor-pointer" onClick={toggleTheme}>
